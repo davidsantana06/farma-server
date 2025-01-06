@@ -25,6 +25,11 @@ export class ProductController {
     return await this.productService.findAll();
   }
 
+  @Get('/company/:companyId')
+  async findAllByCompanyId(@Param('companyId') companyId: string) {
+    return await this.productService.findAllByCompanyId(companyId);
+  }
+
   @Get('/:id')
   async findOne(@Param('id') id: string) {
     return await this.productService.findOne(id);

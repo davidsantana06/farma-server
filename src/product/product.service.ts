@@ -18,6 +18,12 @@ export class ProductService {
     return this.productRepository.findMany();
   }
 
+  findAllByCompanyId(
+    companyId: string,
+  ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
+    return this.productRepository.findManyByCompanyId(companyId);
+  }
+
   findOne(
     id: string,
   ): Promise<Product & { commentaries: Commentary[]; company: Company }> {

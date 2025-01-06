@@ -22,6 +22,17 @@ export class ProductRepository {
     (Product & { commentaries: Commentary[]; company: Company })[]
   > {
     return this.prisma.product.findMany({
+      orderBy: { commentaries: { _count: 'desc' }, name: 'asc' },
+      include: { commentaries: true, company: true },
+    });
+  }
+
+  findManyByCompanyId(
+    companyId: string,
+  ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
+    return this.prisma.product.findMany({
+      where: { companyId },
+      orderBy: { commentaries: { _count: 'desc' }, name: 'asc' },
       include: { commentaries: true, company: true },
     });
   }
