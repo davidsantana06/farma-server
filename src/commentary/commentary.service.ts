@@ -16,6 +16,12 @@ export class CommentaryService {
     return this.commentaryRepository.findMany();
   }
 
+  findAllByProductId(
+    productId: string,
+  ): Promise<(Commentary & { product: Product })[]> {
+    return this.commentaryRepository.findManyByProductId(productId);
+  }
+
   findOne(id: string): Promise<Commentary & { product: Product }> {
     return this.commentaryRepository.findUnique(id);
   }

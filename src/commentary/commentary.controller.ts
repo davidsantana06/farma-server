@@ -25,6 +25,11 @@ export class CommentaryController {
     return await this.commentaryService.findAll();
   }
 
+  @Get('/product/:productId')
+  async findAllByProductId(@Param('productId') productId: string) {
+    return await this.commentaryService.findAllByProductId(productId);
+  }
+
   @Get('/:id')
   async findOne(@Param('id') id: string) {
     return await this.commentaryService.findOne(id);
