@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: farma-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - PORT=${PORT}
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+      # 3000 do PC acessa a 3000 do container
+    command: bash -c "npm run start:dev"
