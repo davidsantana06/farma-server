@@ -11,5 +11,4 @@ services:
       - .:/app
     ports:
       - "3000:3000"
-      # 3000 do PC acessa a 3000 do container
     command: bash -c "npm run start:dev"
