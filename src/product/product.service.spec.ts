@@ -76,7 +76,6 @@ describe('ProductService', () => {
           useValue: {
             create: jest.fn(),
             findMany: jest.fn(),
-            findManyByCompanyId: jest.fn(),
             findUnique: jest.fn(),
             update: jest.fn(),
             delete: jest.fn(),
@@ -119,7 +118,7 @@ describe('ProductService', () => {
       const result = await service.findAll();
 
       expect(result).toEqual(foundProducts);
-      expect(repository.findMany).toHaveBeenCalledWith();
+      expect(repository.findMany).toHaveBeenCalled();
     });
 
     it('should return all products by company id', async () => {
@@ -133,14 +132,12 @@ describe('ProductService', () => {
           company: {},
         })) as (Product & { commentaries: Commentary[]; company: Company })[];
 
-      jest
-        .spyOn(repository, 'findManyByCompanyId')
-        .mockResolvedValue(foundProducts);
+      jest.spyOn(repository, 'findMany').mockResolvedValue(foundProducts);
 
-      const result = await service.findAllByCompanyId(companyId);
+      const result = await service.findAll(companyId);
 
       expect(result).toEqual(foundProducts);
-      expect(repository.findManyByCompanyId).toHaveBeenCalledWith(companyId);
+      expect(repository.findMany).toHaveBeenCalledWith(companyId);
     });
   });
 

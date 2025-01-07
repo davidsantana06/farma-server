@@ -18,20 +18,11 @@ export class ProductRepository {
     });
   }
 
-  findMany(): Promise<
-    (Product & { commentaries: Commentary[]; company: Company })[]
-  > {
-    return this.prisma.product.findMany({
-      orderBy: { name: 'asc' },
-      include: { commentaries: true, company: true },
-    });
-  }
-
-  findManyByCompanyId(
-    companyId: string,
+  findMany(
+    companyId?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
     return this.prisma.product.findMany({
-      where: { companyId },
+      where: companyId ? { companyId } : {},
       orderBy: { name: 'asc' },
       include: { commentaries: true, company: true },
     });

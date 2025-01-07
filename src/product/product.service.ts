@@ -12,16 +12,10 @@ export class ProductService {
     return this.productRepository.create(data);
   }
 
-  findAll(): Promise<
-    (Product & { commentaries: Commentary[]; company: Company })[]
-  > {
-    return this.productRepository.findMany();
-  }
-
-  findAllByCompanyId(
-    companyId: string,
+  findAll(
+    companyId?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
-    return this.productRepository.findManyByCompanyId(companyId);
+    return this.productRepository.findMany(companyId);
   }
 
   findOne(
