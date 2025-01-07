@@ -94,6 +94,9 @@ describe('CommentaryService', () => {
   });
 
   describe('find all', () => {
+    const page = 1;
+    const limit = commentaries.length;
+
     it('should return all commentaries', async () => {
       const foundCommentaries = commentaries.map((commentary) => ({
         ...commentary,
@@ -102,10 +105,14 @@ describe('CommentaryService', () => {
 
       jest.spyOn(repository, 'findMany').mockResolvedValue(foundCommentaries);
 
-      const result = await service.findAll();
+      const result = await service.findAll(page, limit);
 
       expect(result).toEqual(foundCommentaries);
-      expect(repository.findMany).toHaveBeenCalled();
+      expect(repository.findMany).toHaveBeenCalledWith(
+        page - 1,
+        limit,
+        undefined,
+      );
     });
 
     it('should return all commentaries by product id', async () => {
@@ -118,14 +125,16 @@ describe('CommentaryService', () => {
           product: {},
         })) as (Commentary & { product: Product })[];
 
-      jest
-        .spyOn(repository, 'findMany')
-        .mockResolvedValue(foundCommentaries);
+      jest.spyOn(repository, 'findMany').mockResolvedValue(foundCommentaries);
 
-      const result = await service.findAll(productId);
+      const result = await service.findAll(page, limit, productId);
 
       expect(result).toEqual(foundCommentaries);
-      expect(repository.findMany).toHaveBeenCalledWith(productId);
+      expect(repository.findMany).toHaveBeenCalledWith(
+        page - 1,
+        limit,
+        productId,
+      );
     });
   });
 

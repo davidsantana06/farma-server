@@ -18,11 +18,17 @@ export class CommentaryRepository {
     });
   }
 
-  findMany(productId?: string): Promise<(Commentary & { product: Product })[]> {
+  findMany(
+    skip: number,
+    take: number,
+    productId?: string,
+  ): Promise<(Commentary & { product: Product })[]> {
     return this.prisma.commentary.findMany({
       where: productId ? { productId } : {},
       orderBy: { createdAt: 'desc' },
       include: { product: true },
+      skip,
+      take,
     });
   }
 

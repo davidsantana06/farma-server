@@ -22,8 +22,16 @@ export class CommentaryController {
   }
 
   @Get('/')
-  async findAll(@Query('productId') productId?: string) {
-    return await this.commentaryService.findAll(productId);
+  async findAll(
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('productId') productId?: string,
+  ) {
+    return await this.commentaryService.findAll(
+      page || 1,
+      limit || 10,
+      productId,
+    );
   }
 
   @Get('/:id')
