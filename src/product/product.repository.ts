@@ -19,12 +19,16 @@ export class ProductRepository {
   }
 
   findMany(
+    skip: number,
+    take: number,
     companyId?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
     return this.prisma.product.findMany({
       where: companyId ? { companyId } : {},
       orderBy: { name: 'asc' },
       include: { commentaries: true, company: true },
+      skip,
+      take,
     });
   }
 

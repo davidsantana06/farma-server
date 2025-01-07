@@ -106,6 +106,9 @@ describe('ProductService', () => {
   });
 
   describe('find all', () => {
+    const page = 1;
+    const limit = products.length;
+
     it('should return all products', async () => {
       const foundProducts = products.map((product) => ({
         ...product,
@@ -115,10 +118,14 @@ describe('ProductService', () => {
 
       jest.spyOn(repository, 'findMany').mockResolvedValue(foundProducts);
 
-      const result = await service.findAll();
+      const result = await service.findAll(page, limit);
 
       expect(result).toEqual(foundProducts);
-      expect(repository.findMany).toHaveBeenCalled();
+      expect(repository.findMany).toHaveBeenCalledWith(
+        page - 1,
+        limit,
+        undefined,
+      );
     });
 
     it('should return all products by company id', async () => {
@@ -134,10 +141,14 @@ describe('ProductService', () => {
 
       jest.spyOn(repository, 'findMany').mockResolvedValue(foundProducts);
 
-      const result = await service.findAll(companyId);
+      const result = await service.findAll(page, limit, companyId);
 
       expect(result).toEqual(foundProducts);
-      expect(repository.findMany).toHaveBeenCalledWith(companyId);
+      expect(repository.findMany).toHaveBeenCalledWith(
+        page - 1,
+        limit,
+        companyId,
+      );
     });
   });
 

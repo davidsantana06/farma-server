@@ -13,9 +13,15 @@ export class ProductService {
   }
 
   findAll(
+    page: number,
+    limit: number,
     companyId?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
-    return this.productRepository.findMany(companyId);
+    return this.productRepository.findMany(
+      (page - 1) * limit,
+      limit,
+      companyId,
+    );
   }
 
   findOne(

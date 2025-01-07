@@ -22,8 +22,12 @@ export class ProductController {
   }
 
   @Get('/')
-  async findAll(@Query('companyId') companyId?: string) {
-    return await this.productService.findAll(companyId);
+  async findAll(
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+    @Query('companyId') companyId?: string,
+  ) {
+    return await this.productService.findAll(page || 1, limit || 10, companyId);
   }
 
   @Get('/:id')
