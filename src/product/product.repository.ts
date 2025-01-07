@@ -22,9 +22,15 @@ export class ProductRepository {
     skip: number,
     take: number,
     companyId?: string,
+    name?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
     return this.prisma.product.findMany({
-      where: companyId ? { companyId } : {},
+      where: {
+        AND: [
+          companyId ? { companyId } : {},
+          name ? { name: { contains: name } } : {},
+        ],
+      },
       orderBy: { name: 'asc' },
       include: { commentaries: true, company: true },
       skip,

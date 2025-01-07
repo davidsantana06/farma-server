@@ -125,6 +125,7 @@ describe('ProductService', () => {
         page - 1,
         limit,
         undefined,
+        undefined,
       );
     });
 
@@ -148,6 +149,7 @@ describe('ProductService', () => {
         page - 1,
         limit,
         companyId,
+        undefined,
       );
     });
   });

@@ -26,8 +26,14 @@ export class ProductController {
     @Query('page') page?: number,
     @Query('limit') limit?: number,
     @Query('companyId') companyId?: string,
+    @Query('name') name?: string,
   ) {
-    return await this.productService.findAll(page || 1, limit || 10, companyId);
+    return await this.productService.findAll(
+      page || 1,
+      limit || 10,
+      companyId,
+      name,
+    );
   }
 
   @Get('/:id')

@@ -16,11 +16,13 @@ export class ProductService {
     page: number,
     limit: number,
     companyId?: string,
+    name?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
     return this.productRepository.findMany(
       (page - 1) * limit,
       limit,
       companyId,
+      name,
     );
   }
 
