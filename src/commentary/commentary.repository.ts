@@ -18,18 +18,9 @@ export class CommentaryRepository {
     });
   }
 
-  findMany(): Promise<(Commentary & { product: Product })[]> {
+  findMany(productId?: string): Promise<(Commentary & { product: Product })[]> {
     return this.prisma.commentary.findMany({
-      orderBy: { createdAt: 'desc' },
-      include: { product: true },
-    });
-  }
-
-  findManyByProductId(
-    productId: string,
-  ): Promise<(Commentary & { product: Product })[]> {
-    return this.prisma.commentary.findMany({
-      where: { productId },
+      where: productId ? { productId } : {},
       orderBy: { createdAt: 'desc' },
       include: { product: true },
     });

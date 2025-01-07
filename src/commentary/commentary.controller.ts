@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Query,
   Param,
   Patch,
   Post,
@@ -21,13 +22,8 @@ export class CommentaryController {
   }
 
   @Get('/')
-  async findAll() {
-    return await this.commentaryService.findAll();
-  }
-
-  @Get('/product/:productId')
-  async findAllByProductId(@Param('productId') productId: string) {
-    return await this.commentaryService.findAllByProductId(productId);
+  async findAll(@Query('productId') productId?: string) {
+    return await this.commentaryService.findAll(productId);
   }
 
   @Get('/:id')

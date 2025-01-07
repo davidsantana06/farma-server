@@ -64,7 +64,6 @@ describe('CommentaryService', () => {
           useValue: {
             create: jest.fn(),
             findMany: jest.fn(),
-            findManyByProductId: jest.fn(),
             findUnique: jest.fn(),
             update: jest.fn(),
             delete: jest.fn(),
@@ -120,13 +119,13 @@ describe('CommentaryService', () => {
         })) as (Commentary & { product: Product })[];
 
       jest
-        .spyOn(repository, 'findManyByProductId')
+        .spyOn(repository, 'findMany')
         .mockResolvedValue(foundCommentaries);
 
-      const result = await service.findAllByProductId(productId);
+      const result = await service.findAll(productId);
 
       expect(result).toEqual(foundCommentaries);
-      expect(repository.findManyByProductId).toHaveBeenCalledWith(productId);
+      expect(repository.findMany).toHaveBeenCalledWith(productId);
     });
   });
 
