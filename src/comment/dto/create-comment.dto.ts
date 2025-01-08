@@ -1,6 +1,6 @@
 import { IsEmail, IsInt, IsString, Length, Min } from 'class-validator';
 
-export class CreateCommentaryDto {
+export class CreateCommentDto {
   @IsInt()
   @Min(1)
   productId: number;

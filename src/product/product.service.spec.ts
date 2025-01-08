@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Commentary, Company, Product } from '@prisma/client';
+import { Comment, Company, Product } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 import { ProductRepository } from './product.repository';
@@ -109,9 +109,9 @@ describe('ProductService', () => {
     it('should return all products', async () => {
       const foundProducts = products.map((product) => ({
         ...product,
-        commentaries: [],
+        comments: [],
         company: {},
-      })) as (Product & { commentaries: Commentary[]; company: Company })[];
+      })) as (Product & { comments: Comment[]; company: Company })[];
 
       jest.spyOn(repository, 'findMany').mockResolvedValue(foundProducts);
 
@@ -133,9 +133,9 @@ describe('ProductService', () => {
         .filter((product) => product.companyId === companyId)
         .map((product) => ({
           ...product,
-          commentaries: [],
+          comments: [],
           company: {},
-        })) as (Product & { commentaries: Commentary[]; company: Company })[];
+        })) as (Product & { comments: Comment[]; company: Company })[];
 
       jest.spyOn(repository, 'findMany').mockResolvedValue(foundProducts);
 
@@ -159,9 +159,9 @@ describe('ProductService', () => {
 
       const foundProduct = {
         ...product,
-        commentaries: [],
+        comments: [],
         company: {},
-      } as Product & { commentaries: Commentary[]; company: Company };
+      } as Product & { comments: Comment[]; company: Company };
 
       jest.spyOn(repository, 'findUnique').mockResolvedValue(foundProduct);
 
@@ -182,9 +182,9 @@ describe('ProductService', () => {
       const updatedProduct = {
         ...product,
         ...data,
-        commentaries: [],
+        comments: [],
         company: {},
-      } as Product & { commentaries: Commentary[]; company: Company };
+      } as Product & { comments: Comment[]; company: Company };
 
       jest.spyOn(repository, 'update').mockResolvedValue(updatedProduct);
 

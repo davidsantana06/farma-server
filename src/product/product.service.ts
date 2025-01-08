@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Company, Commentary, Product } from '@prisma/client';
+import { Company, Comment, Product } from '@prisma/client';
 import { ProductRepository } from './product.repository';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -17,7 +17,7 @@ export class ProductService {
     limit: number,
     companyId?: number,
     name?: string,
-  ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
+  ): Promise<(Product & { comments: Comment[]; company: Company })[]> {
     return this.productRepository.findMany(
       (page - 1) * limit,
       limit,
@@ -28,14 +28,14 @@ export class ProductService {
 
   findOne(
     id: number,
-  ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
+  ): Promise<Product & { comments: Comment[]; company: Company }> {
     return this.productRepository.findUnique(id);
   }
 
   update(
     id: number,
     data: UpdateProductDto,
-  ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
+  ): Promise<Product & { comments: Comment[]; company: Company }> {
     return this.productRepository.update(id, data);
   }
 

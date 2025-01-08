@@ -3,13 +3,13 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CommentaryModule } from './commentary/commentary.module';
+import { CommentModule } from './comment/comment.module';
 import { CompanyModule } from './company/company.module';
 import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
-    CommentaryModule,
+    CommentModule,
     CompanyModule,
     ProductModule,
     ServeStaticModule.forRoot({

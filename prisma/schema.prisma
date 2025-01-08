@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Commentary {
+model Comment {
   id          Int      @id @default(autoincrement())
   productId   Int
   authorName  String
@@ -29,15 +29,15 @@ model Company {
 }
 
 model Product {
-  id           Int          @id @default(autoincrement())
-  companyId    Int
-  name         String
-  description  String
-  price        Float
-  dosage       String
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  id          Int       @id @default(autoincrement())
+  companyId   Int
+  name        String
+  description String
+  price       Float
+  dosage      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
-  company      Company      @relation(fields: [companyId], references: [id])
-  commentaries Commentary[]
+  comments    Comment[]
+  company     Company   @relation(fields: [companyId], references: [id])
 }

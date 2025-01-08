@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Commentary, Company, Product } from '@prisma/client';
+import { Comment, Company, Product } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -13,7 +13,7 @@ export class ProductRepository {
     return this.prisma.product.create({
       data: {
         ...rest,
-        company: { connect: { id: Number(companyId) } },
+        company: { connect: { id: companyId } },
       },
     });
   }
@@ -23,7 +23,7 @@ export class ProductRepository {
     take: number,
     companyId?: number,
     name?: string,
-  ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
+  ): Promise<(Product & { comments: Comment[]; company: Company })[]> {
     return this.prisma.product.findMany({
       where: {
         AND: [
@@ -32,7 +32,7 @@ export class ProductRepository {
         ],
       },
       orderBy: { name: 'asc' },
-      include: { commentaries: true, company: true },
+      include: { comments: true, company: true },
       skip,
       take,
     });
@@ -40,21 +40,21 @@ export class ProductRepository {
 
   findUnique(
     id: number,
-  ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
+  ): Promise<Product & { comments: Comment[]; company: Company }> {
     return this.prisma.product.findUnique({
       where: { id },
-      include: { commentaries: true, company: true },
+      include: { comments: true, company: true },
     });
   }
 
   update(
     id: number,
     data: UpdateProductDto,
-  ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
+  ): Promise<Product & { comments: Comment[]; company: Company }> {
     return this.prisma.product.update({
       where: { id },
       data,
-      include: { commentaries: true, company: true },
+      include: { comments: true, company: true },
     });
   }
 

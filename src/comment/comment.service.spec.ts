@@ -1,19 +1,19 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Commentary, Product } from '@prisma/client';
+import { Comment, Product } from '@prisma/client';
 import { plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
-import { CommentaryRepository } from './commentary.repository';
-import { CommentaryService } from './commentary.service';
-import { CreateCommentaryDto } from './dto/create-commentary.dto';
-import { UpdateCommentaryDto } from './dto/update-commentary.dto';
+import { CommentRepository } from './comment.repository';
+import { CommentService } from './comment.service';
+import { CreateCommentDto } from './dto/create-comment.dto';
+import { UpdateCommentDto } from './dto/update-comment.dto';
 
-describe('CommentaryService', () => {
+describe('CommentService', () => {
   const products = [
     { id: 1 },
     { id: 2 },
   ];
 
-  const commentaries = [
+  const comments = [
     {
       id: 1,
       productId: products[0].id,
@@ -52,15 +52,15 @@ describe('CommentaryService', () => {
     content: 7,
   };
 
-  let repository: CommentaryRepository;
-  let service: CommentaryService;
+  let repository: CommentRepository;
+  let service: CommentService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
-        CommentaryService,
+        CommentService,
         {
-          provide: CommentaryRepository,
+          provide: CommentRepository,
           useValue: {
             create: jest.fn(),
             findMany: jest.fn(),
@@ -72,36 +72,36 @@ describe('CommentaryService', () => {
       ],
     }).compile();
 
-    repository = module.get<CommentaryRepository>(CommentaryRepository);
-    service = module.get<CommentaryService>(CommentaryService);
+    repository = module.get<CommentRepository>(CommentRepository);
+    service = module.get<CommentService>(CommentService);
   });
 
   describe('create', () => {
-    const commentary = commentaries[0];
+    const comment = comments[0];
 
-    it('should create a new commentary', async () => {
-      const data = commentary as CreateCommentaryDto;
+    it('should create a new comment', async () => {
+      const data = comment as CreateCommentDto;
 
-      const createdCommentary = commentary as Commentary;
+      const createdComment = comment as Comment;
 
-      jest.spyOn(repository, 'create').mockResolvedValue(createdCommentary);
+      jest.spyOn(repository, 'create').mockResolvedValue(createdComment);
 
       const result = await service.create(data);
 
-      expect(result).toEqual(createdCommentary);
+      expect(result).toEqual(createdComment);
       expect(repository.create).toHaveBeenCalledWith(data);
     });
   });
 
   describe('find all', () => {
     const page = 1;
-    const limit = commentaries.length;
+    const limit = comments.length;
 
-    it('should return all commentaries', async () => {
-      const foundCommentaries = commentaries.map((commentary) => ({
-        ...commentary,
+    it('should return all comments', async () => {
+      const foundCommentaries = comments.map((comment) => ({
+        ...comment,
         product: {},
-      })) as (Commentary & { product: Product })[];
+      })) as (Comment & { product: Product })[];
 
       jest.spyOn(repository, 'findMany').mockResolvedValue(foundCommentaries);
 
@@ -115,15 +115,15 @@ describe('CommentaryService', () => {
       );
     });
 
-    it('should return all commentaries by product id', async () => {
+    it('should return all comments by product id', async () => {
       const productId = products[0].id;
 
-      const foundCommentaries = commentaries
-        .filter((commentary) => commentary.productId === productId)
-        .map((commentary) => ({
-          ...commentary,
+      const foundCommentaries = comments
+        .filter((comment) => comment.productId === productId)
+        .map((comment) => ({
+          ...comment,
           product: {},
-        })) as (Commentary & { product: Product })[];
+        })) as (Comment & { product: Product })[];
 
       jest.spyOn(repository, 'findMany').mockResolvedValue(foundCommentaries);
 
@@ -139,48 +139,48 @@ describe('CommentaryService', () => {
   });
 
   describe('find one', () => {
-    const commentary = commentaries[1];
+    const comment = comments[1];
 
-    it('should return a single commentary', async () => {
-      const { id } = commentary;
+    it('should return a single comment', async () => {
+      const { id } = comment;
 
-      const foundCommentary = {
-        ...commentary,
+      const foundComment = {
+        ...comment,
         product: {},
-      } as Commentary & { product: Product };
+      } as Comment & { product: Product };
 
-      jest.spyOn(repository, 'findUnique').mockResolvedValue(foundCommentary);
+      jest.spyOn(repository, 'findUnique').mockResolvedValue(foundComment);
 
       const result = await service.findOne(id);
 
-      expect(result).toEqual(foundCommentary);
+      expect(result).toEqual(foundComment);
       expect(repository.findUnique).toHaveBeenCalledWith(id);
     });
   });
 
   describe('update', () => {
-    const commentary = commentaries[2];
+    const comment = comments[2];
 
-    it('should update an existing commentary', async () => {
-      const { id } = commentary;
-      const data = validData as UpdateCommentaryDto;
+    it('should update an existing comment', async () => {
+      const { id } = comment;
+      const data = validData as UpdateCommentDto;
 
-      const updatedCommentary = {
-        ...commentary,
+      const updatedComment = {
+        ...comment,
         ...data,
         product: {},
-      } as Commentary & { product: Product };
+      } as Comment & { product: Product };
 
-      jest.spyOn(repository, 'update').mockResolvedValue(updatedCommentary);
+      jest.spyOn(repository, 'update').mockResolvedValue(updatedComment);
 
       const result = await service.update(id, data);
 
-      expect(result).toEqual(updatedCommentary);
+      expect(result).toEqual(updatedComment);
       expect(repository.update).toHaveBeenCalledWith(id, data);
     });
 
     it('should return errors for invalid data', async () => {
-      const data = plainToInstance(CreateCommentaryDto, invalidData);
+      const data = plainToInstance(CreateCommentDto, invalidData);
 
       const result = await validate(data);
 
@@ -189,18 +189,18 @@ describe('CommentaryService', () => {
   });
 
   describe('remove', () => {
-    const commentary = commentaries[3];
+    const comment = comments[3];
 
-    it('should remove an existing commentary', async () => {
-      const { id } = commentary;
+    it('should remove an existing comment', async () => {
+      const { id } = comment;
 
-      const deletedCommentary = commentary as Commentary;
+      const deletedComment = comment as Comment;
 
-      jest.spyOn(repository, 'delete').mockResolvedValue(deletedCommentary);
+      jest.spyOn(repository, 'delete').mockResolvedValue(deletedComment);
 
       const result = await service.remove(id);
 
-      expect(result).toEqual(commentary);
+      expect(result).toEqual(comment);
       expect(repository.delete).toHaveBeenCalledWith(id);
     });
   });
