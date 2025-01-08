@@ -13,7 +13,7 @@ export class ProductRepository {
     return this.prisma.product.create({
       data: {
         ...rest,
-        company: { connect: { id: companyId } },
+        company: { connect: { id: Number(companyId) } },
       },
     });
   }
@@ -21,7 +21,7 @@ export class ProductRepository {
   findMany(
     skip: number,
     take: number,
-    companyId?: string,
+    companyId?: number,
     name?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
     return this.prisma.product.findMany({
@@ -39,7 +39,7 @@ export class ProductRepository {
   }
 
   findUnique(
-    id: string,
+    id: number,
   ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
     return this.prisma.product.findUnique({
       where: { id },
@@ -48,7 +48,7 @@ export class ProductRepository {
   }
 
   update(
-    id: string,
+    id: number,
     data: UpdateProductDto,
   ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
     return this.prisma.product.update({
@@ -58,7 +58,7 @@ export class ProductRepository {
     });
   }
 
-  delete(id: string): Promise<Product> {
+  delete(id: number): Promise<Product> {
     return this.prisma.product.delete({ where: { id } });
   }
 }

@@ -8,14 +8,11 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
 describe('ProductService', () => {
-  const companies = [
-    { id: 'd3cb1bd0-9365-43c4-be89-e484e8bf48a5' },
-    { id: '317c7ae0-bcb2-4b35-8490-753ed9b79443' },
-  ];
+  const companies = [{ id: 1 }, { id: 2 }];
 
   const products = [
     {
-      id: '4002f37f-bfc1-4478-afa3-924bcb59d806',
+      id: 1,
       companyId: companies[0].id,
       name: 'Ashwagandha',
       description:
@@ -24,7 +21,7 @@ describe('ProductService', () => {
       dosage: '300mg duas vezes ao dia',
     },
     {
-      id: '6d0599ac-e8ad-41f7-bc04-c725db756d5c',
+      id: 2,
       companyId: companies[1].id,
       name: 'Magnésio Dimalato',
       description:
@@ -33,7 +30,7 @@ describe('ProductService', () => {
       dosage: '400mg uma vez ao dia',
     },
     {
-      id: 'cb1e5cde-ab6c-4bd0-bbb3-a3ecbc61ac26',
+      id: 3,
       companyId: companies[0].id,
       name: 'Ômega 3',
       description:
@@ -42,7 +39,7 @@ describe('ProductService', () => {
       dosage: '1000mg duas vezes ao dia',
     },
     {
-      id: '6d135a7f-acf1-45a9-bfdb-bb7c7d459fe5',
+      id: 4,
       companyId: companies[1].id,
       name: 'Vitamina D3',
       description:

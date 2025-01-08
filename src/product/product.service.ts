@@ -15,7 +15,7 @@ export class ProductService {
   findAll(
     page: number,
     limit: number,
-    companyId?: string,
+    companyId?: number,
     name?: string,
   ): Promise<(Product & { commentaries: Commentary[]; company: Company })[]> {
     return this.productRepository.findMany(
@@ -27,19 +27,19 @@ export class ProductService {
   }
 
   findOne(
-    id: string,
+    id: number,
   ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
     return this.productRepository.findUnique(id);
   }
 
   update(
-    id: string,
+    id: number,
     data: UpdateProductDto,
   ): Promise<Product & { commentaries: Commentary[]; company: Company }> {
     return this.productRepository.update(id, data);
   }
 
-  remove(id: string): Promise<Product> {
+  remove(id: number): Promise<Product> {
     return this.productRepository.delete(id);
   }
 }

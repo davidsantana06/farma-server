@@ -25,7 +25,7 @@ export class ProductController {
   async findAll(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
-    @Query('companyId') companyId?: string,
+    @Query('companyId') companyId?: number,
     @Query('name') name?: string,
   ) {
     return await this.productService.findAll(
@@ -37,17 +37,17 @@ export class ProductController {
   }
 
   @Get('/:id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
     return await this.productService.findOne(id);
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() data: UpdateProductDto) {
+  async update(@Param('id') id: number, @Body() data: UpdateProductDto) {
     return await this.productService.update(id, data);
   }
 
   @Delete('/:id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
     return await this.productService.remove(id);
   }
 }

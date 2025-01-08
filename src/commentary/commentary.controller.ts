@@ -25,7 +25,7 @@ export class CommentaryController {
   async findAll(
     @Query('page') page?: number,
     @Query('limit') limit?: number,
-    @Query('productId') productId?: string,
+    @Query('productId') productId?: number,
   ) {
     return await this.commentaryService.findAll(
       page || 1,
@@ -35,17 +35,17 @@ export class CommentaryController {
   }
 
   @Get('/:id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
     return await this.commentaryService.findOne(id);
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() data: UpdateCommentaryDto) {
+  async update(@Param('id') id: number, @Body() data: UpdateCommentaryDto) {
     return await this.commentaryService.update(id, data);
   }
 
   @Delete('/:id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
     return await this.commentaryService.remove(id);
   }
 }

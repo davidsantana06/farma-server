@@ -26,17 +26,17 @@ export class CompanyController {
   }
 
   @Get('/:id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
     return await this.companyService.findOne(id);
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() data: UpdateCompanyDto) {
+  async update(@Param('id') id: number, @Body() data: UpdateCompanyDto) {
     return await this.companyService.update(id, data);
   }
 
   @Delete('/:id')
-  async remove(@Param('id') id: string) {
+  async remove(@Param('id') id: number) {
     return await this.companyService.remove(id);
   }
 }

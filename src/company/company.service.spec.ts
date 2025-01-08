@@ -10,19 +10,19 @@ import { UpdateCompanyDto } from './dto/update-company.dto';
 describe('CompanyService', () => {
   const companies = [
     {
-      id: '4002f37f-bfc1-4478-afa3-924bcb59d806',
+      id: 1,
       name: 'Drogasil',
     },
     {
-      id: '6d0599ac-e8ad-41f7-bc04-c725db756d5c',
+      id: 2,
       name: 'Farmafine',
     },
     {
-      id: 'cb1e5cde-ab6c-4bd0-bbb3-a3ecbc61ac26',
+      id: 3,
       name: 'Oficial Farma',
     },
     {
-      id: '6d135a7f-acf1-45a9-bfdb-bb7c7d459fe5',
+      id: 4,
       name: 'Ultrafarma',
     },
   ];

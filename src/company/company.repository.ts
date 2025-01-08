@@ -19,7 +19,7 @@ export class CompanyRepository {
     });
   }
 
-  findUnique(id: string): Promise<Company & { products: Product[] }> {
+  findUnique(id: number): Promise<Company & { products: Product[] }> {
     return this.prisma.company.findUnique({
       where: { id },
       include: { products: true },
@@ -27,7 +27,7 @@ export class CompanyRepository {
   }
 
   update(
-    id: string,
+    id: number,
     data: UpdateCompanyDto,
   ): Promise<Company & { products: Product[] }> {
     return this.prisma.company.update({
@@ -37,7 +37,7 @@ export class CompanyRepository {
     });
   }
 
-  delete(id: string): Promise<Company> {
+  delete(id: number): Promise<Company> {
     return this.prisma.company.delete({ where: { id } });
   }
 }

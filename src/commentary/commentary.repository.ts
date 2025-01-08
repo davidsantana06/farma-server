@@ -13,7 +13,7 @@ export class CommentaryRepository {
     return this.prisma.commentary.create({
       data: {
         ...rest,
-        product: { connect: { id: productId } },
+        product: { connect: { id: Number(productId) } },
       },
     });
   }
@@ -21,7 +21,7 @@ export class CommentaryRepository {
   findMany(
     skip: number,
     take: number,
-    productId?: string,
+    productId?: number,
   ): Promise<(Commentary & { product: Product })[]> {
     return this.prisma.commentary.findMany({
       where: productId ? { productId } : {},
@@ -32,7 +32,7 @@ export class CommentaryRepository {
     });
   }
 
-  findUnique(id: string): Promise<Commentary & { product: Product }> {
+  findUnique(id: number): Promise<Commentary & { product: Product }> {
     return this.prisma.commentary.findUnique({
       where: { id },
       include: { product: true },
@@ -40,7 +40,7 @@ export class CommentaryRepository {
   }
 
   update(
-    id: string,
+    id: number,
     data: UpdateCommentaryDto,
   ): Promise<Commentary & { product: Product }> {
     return this.prisma.commentary.update({
@@ -50,7 +50,7 @@ export class CommentaryRepository {
     });
   }
 
-  delete(id: string): Promise<Commentary> {
+  delete(id: number): Promise<Commentary> {
     return this.prisma.commentary.delete({ where: { id } });
   }
 }

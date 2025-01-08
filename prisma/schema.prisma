@@ -8,8 +8,8 @@ datasource db {
 }
 
 model Commentary {
-  id          String   @id @default(uuid())
-  productId   String
+  id          Int      @id @default(autoincrement())
+  productId   Int
   authorName  String
   authorEmail String
   content     String
@@ -20,7 +20,7 @@ model Commentary {
 }
 
 model Company {
-  id        String    @id @default(uuid())
+  id        Int       @id @default(autoincrement())
   name      String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -29,8 +29,8 @@ model Company {
 }
 
 model Product {
-  id           String       @id @default(uuid())
-  companyId    String
+  id           Int          @id @default(autoincrement())
+  companyId    Int
   name         String
   description  String
   price        Float

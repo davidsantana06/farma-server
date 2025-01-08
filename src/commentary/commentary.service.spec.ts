@@ -9,34 +9,34 @@ import { UpdateCommentaryDto } from './dto/update-commentary.dto';
 
 describe('CommentaryService', () => {
   const products = [
-    { id: 'd3cb1bd0-9365-43c4-be89-e484e8bf48a5' },
-    { id: '317c7ae0-bcb2-4b35-8490-753ed9b79443' },
+    { id: 1 },
+    { id: 2 },
   ];
 
   const commentaries = [
     {
-      id: '4002f37f-bfc1-4478-afa3-924bcb59d806',
+      id: 1,
       productId: products[0].id,
       authorName: 'Alisson Rodrigues',
       authorEmail: 'alisson_rodrigues@gmail.com',
       content: 'Ótimo produto, recomendo!',
     },
     {
-      id: '6d0599ac-e8ad-41f7-bc04-c725db756d5c',
+      id: 2,
       productId: products[1].id,
       authorName: 'Kaik Bomfim',
       authorEmail: 'kaik_bomfim@hotmail.com',
       content: 'Produto de qualidade!',
     },
     {
-      id: 'cb1e5cde-ab6c-4bd0-bbb3-a3ecbc61ac26',
+      id: 3,
       productId: products[0].id,
       authorName: 'Leonardo Andrade',
       authorEmail: 'leonardo_andrade@outlook.com',
       content: 'Muito bom!',
     },
     {
-      id: '6d135a7f-acf1-45a9-bfdb-bb7c7d459fe5',
+      id: 4,
       productId: products[1].id,
       authorName: 'Pedro Vitor',
       authorEmail: 'pedro_vitor@yahoo.com',

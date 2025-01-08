@@ -16,18 +16,18 @@ export class CompanyService {
     return this.companyRepository.findMany();
   }
 
-  findOne(id: string): Promise<Company & { products: Product[] }> {
+  findOne(id: number): Promise<Company & { products: Product[] }> {
     return this.companyRepository.findUnique(id);
   }
 
   update(
-    id: string,
+    id: number,
     data: UpdateCompanyDto,
   ): Promise<Company & { products: Product[] }> {
     return this.companyRepository.update(id, data);
   }
 
-  remove(id: string): Promise<Company> {
+  remove(id: number): Promise<Company> {
     return this.companyRepository.delete(id);
   }
 }

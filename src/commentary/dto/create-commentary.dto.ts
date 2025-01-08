@@ -1,8 +1,9 @@
-import { IsEmail, IsString, IsUUID, Length } from 'class-validator';
+import { IsEmail, IsInt, IsString, Length, Min } from 'class-validator';
 
 export class CreateCommentaryDto {
-  @IsUUID()
-  productId: string;
+  @IsInt()
+  @Min(1)
+  productId: number;
 
   @IsString()
   @Length(1, 50)

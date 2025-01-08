@@ -15,7 +15,7 @@ export class CommentaryService {
   findAll(
     page: number,
     limit: number,
-    productId?: string,
+    productId?: number,
   ): Promise<(Commentary & { product: Product })[]> {
     return this.commentaryRepository.findMany(
       (page - 1) * limit,
@@ -24,18 +24,18 @@ export class CommentaryService {
     );
   }
 
-  findOne(id: string): Promise<Commentary & { product: Product }> {
+  findOne(id: number): Promise<Commentary & { product: Product }> {
     return this.commentaryRepository.findUnique(id);
   }
 
   update(
-    id: string,
+    id: number,
     data: UpdateCommentaryDto,
   ): Promise<Commentary & { product: Product }> {
     return this.commentaryRepository.update(id, data);
   }
 
-  remove(id: string): Promise<Commentary> {
+  remove(id: number): Promise<Commentary> {
     return this.commentaryRepository.delete(id);
   }
 }
