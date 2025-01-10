@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: farma-app
+    container_name: farma-server
     build:
       context: .
       dockerfile: Dockerfile
