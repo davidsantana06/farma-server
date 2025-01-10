@@ -106,6 +106,9 @@ describe('ProductService', () => {
     const page = 1;
     const limit = products.length;
 
+    const skip = (page - 1) * limit;
+    const take = limit;
+
     it('should return all products', async () => {
       const foundProducts = products.map((product) => ({
         ...product,
@@ -119,8 +122,8 @@ describe('ProductService', () => {
 
       expect(result).toEqual(foundProducts);
       expect(repository.findMany).toHaveBeenCalledWith(
-        page - 1,
-        limit,
+        skip,
+        take,
         undefined,
         undefined,
       );
@@ -143,8 +146,8 @@ describe('ProductService', () => {
 
       expect(result).toEqual(foundProducts);
       expect(repository.findMany).toHaveBeenCalledWith(
-        page - 1,
-        limit,
+        skip,
+        take,
         companyId,
         undefined,
       );

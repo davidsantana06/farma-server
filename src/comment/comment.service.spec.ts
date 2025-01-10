@@ -8,10 +8,7 @@ import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 
 describe('CommentService', () => {
-  const products = [
-    { id: 1 },
-    { id: 2 },
-  ];
+  const products = [{ id: 1 }, { id: 2 }];
 
   const comments = [
     {
@@ -97,6 +94,9 @@ describe('CommentService', () => {
     const page = 1;
     const limit = comments.length;
 
+    const skip = (page - 1) * limit;
+    const take = limit;
+
     it('should return all comments', async () => {
       const foundCommentaries = comments.map((comment) => ({
         ...comment,
@@ -108,11 +108,7 @@ describe('CommentService', () => {
       const result = await service.findAll(page, limit);
 
       expect(result).toEqual(foundCommentaries);
-      expect(repository.findMany).toHaveBeenCalledWith(
-        page - 1,
-        limit,
-        undefined,
-      );
+      expect(repository.findMany).toHaveBeenCalledWith(skip, take, undefined);
     });
 
     it('should return all comments by product id', async () => {
@@ -130,11 +126,7 @@ describe('CommentService', () => {
       const result = await service.findAll(page, limit, productId);
 
       expect(result).toEqual(foundCommentaries);
-      expect(repository.findMany).toHaveBeenCalledWith(
-        page - 1,
-        limit,
-        productId,
-      );
+      expect(repository.findMany).toHaveBeenCalledWith(skip, take, productId);
     });
   });
 
