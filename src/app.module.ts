@@ -13,7 +13,7 @@ import { ProductModule } from './product/product.module';
     CompanyModule,
     ProductModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'public'),
+      rootPath: join(__dirname, '..', '..', 'public'),
       serveRoot: '/public',
       serveStaticOptions: {
         maxAge: '1y',
