@@ -1,11 +1,10 @@
 services:
   app:
-    container_name: farma-server
+    container_name: farma-server-deploy
     build:
       context: .
       dockerfile: Dockerfile
     environment:
-      - DATABASE_URL=${DATABASE_URL}
       - PORT=${PORT}
     volumes:
       - .:/app
