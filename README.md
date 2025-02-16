@@ -15,10 +15,7 @@ O sistema foi projetado para ser executado via **Docker**, proporcionando maior 
 git clone https://github.com/davidsantana06/farma-server
 ```
 
-Após clonar o repositório, é preciso criar um arquivo `.env` baseado no modelo disponível em `.env.example`, especificando os seguintes valores:
-    
-- `DATABASE_URL` — O caminho para o banco de dados;
-- `PORT` — A porta na qual a aplicação será executada.
+Após clonar o repositório, é necessário criar um arquivo `.env` com base no modelo disponível em `.env.example`, especificando o valor de `PORT` — a porta na qual a aplicação será executada.
 
 Com o arquivo `.env` configurado, o servidor pode ser executado com o comando:
 
